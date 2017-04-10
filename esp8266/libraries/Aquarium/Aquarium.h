@@ -64,7 +64,7 @@ class Aquarium
 		int getWifiStatus();
 		
 		//save and restore device state from eeprom
-		void saveDeviceState(int deviceStatePram);
+		int saveDeviceState(int deviceStatePram);
 		int restoreDeviceState();
 		
 		//setters and getters for device state and temperature value

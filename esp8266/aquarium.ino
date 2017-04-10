@@ -302,7 +302,7 @@ void loop(){
 					if (aquarium.getSerialDebug()){
 						Serial.println("####			START MESSAGE				 ####");
 						Serial.println("#	New temperature accuracy value has been added to EEPROM");
-						Serial.println("#	Temperature accuracy value: " + String(temperatureAccuracyEeprom));
+						Serial.println("#	Temperature accuracy value: " + String(aquarium.getTemperatureAccuracy()));
 						Serial.println("####			END MESSAGE				 ####");
 						Serial.println();
 					}
@@ -710,7 +710,7 @@ void loop(){
 		if (((abs(temperature1Prev - aquarium.getTemperature1()) > aquarium.getTemperatureAccuracy()) || (abs(temperature2Prev - aquarium.getTemperature2()) > aquarium.getTemperatureAccuracy())) && (aquarium.getWifiStatus())){
 			temperature1Prev = aquarium.getTemperature1();
 			temperature2Prev = aquarium.getTemperature2();
-			httpRequestStr = String("GET /migrate/backend/insert.php?action=temperature&temp1=" + aquarium.getTemperature1() + "&temp2=" + aquarium.getTemperature2() + "&request_id=" + String(requestId) + "&note=Urzadzenie" + "&crc=" + String(aquarium.codeCrc()) + " HTTP/1.1\r\n") + "Host: " + aquarium.getHost() + "\r\n" + "Connection: close\r\n\r\n";
+			httpRequestStr = String("GET /migrate/backend/insert.php?action=temperature&temp1=" + String(aquarium.getTemperature1()) + "&temp2=" + String(aquarium.getTemperature2()) + "&request_id=" + String(requestId) + "&note=Urzadzenie" + "&crc=" + String(aquarium.codeCrc()) + " HTTP/1.1\r\n") + "Host: " + aquarium.getHost() + "\r\n" + "Connection: close\r\n\r\n";
 			
 			if (client.connect(aquarium.getHost(), 80)){
 				requestId = random(65535);
@@ -750,7 +750,7 @@ void loop(){
 					if (aquarium.getOnlineDebug()){
 						requestId = random(65535);
 						onlineDebugStr = "New%20temperature%20value!%0ATemperature%20#1:*" + String(aquarium.getTemperature1()) + "%0ATemperature%20#2:%20" + String(aquarium.getTemperature2());
-						httpRequestStr = String("GET /migrate/backend/insert.php?action=debug&request_id=" + String(requestId) + "&debug_info=" + String(onlineDebugStr) + "&crc=" + String(codeCrc(timeClient)) + " HTTP/1.1\r\n") + "Host: " + aquarium.getHost() + "\r\n" + "Connection: close\r\n\r\n";
+						httpRequestStr = String("GET /migrate/backend/insert.php?action=debug&request_id=" + String(requestId) + "&debug_info=" + String(onlineDebugStr) + "&crc=" + String(aquarium.codeCrc()) + " HTTP/1.1\r\n") + "Host: " + aquarium.getHost() + "\r\n" + "Connection: close\r\n\r\n";
 						
 						if (client.connect(aquarium.getHost(), 80)){
 							client.print(httpRequestStr);
@@ -817,7 +817,7 @@ void loop(){
 		
 		//report temperature sensors error
 		if (aquarium.getSerialDebug())
-			if ((aquarium.getTemperature1() == "0.00") && (aquarium.getTemperature2()))
+			if ((aquarium.getTemperature1() == 0) && (aquarium.getTemperature2() == 0))
 				Serial.println("Error! Possibly temperature sensor problem!");
 		
 		millisValue = millis();
@@ -852,9 +852,9 @@ void restartWifi(void) {
 	delay(10);
 	Serial.print("Connecting to ");
 	delay(10);
-	Serial.println(WLAN_SSID);
+	Serial.println(aquarium.getWlanSsid());
 	delay(10);
-	WiFi.begin(WLAN_SSID, WLAN_PASS);
+	WiFi.begin(aquarium.getWlanSsid(), aquarium.getWlanPassword());
 
 	for (int i=0; i<20; i++){
 		if (WiFi.status() == WL_CONNECTED){

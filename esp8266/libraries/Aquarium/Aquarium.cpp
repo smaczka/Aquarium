@@ -136,9 +136,9 @@ int Aquarium::restoreOnlineDebug(){
 int Aquarium::saveDeviceState(int deviceStatePram){
 	String deviceStateStr;
 
-	if ((deviceStateStr == 1) || (deviceStateStr == 0)){
+	if ((deviceStatePram == 1) || (deviceStatePram == 0)){
 		deviceStateStr = String(deviceStatePram);
-		EEPROM.write(12, serialDebugStr[0]);
+		EEPROM.write(12, deviceStateStr[0]);
 		EEPROM.commit();
 		delay(50);
 		
