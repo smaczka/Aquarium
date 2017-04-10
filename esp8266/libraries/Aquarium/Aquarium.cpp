@@ -2,7 +2,7 @@
 
 WiFiUDP udpNtp;
 
-Aquarium::Aquarium(): ONE_WIRE_BUS(14), RELAY_PIN(12), WLAN_SSID("karolina_i_szymon"), WLAN_PASS("szymonkarolina19891990"), HOST("szymonmaczka.2ap.pl"), timeNtp(udpNtp, "0.pl.pool.ntp.org", 3600)
+Aquarium::Aquarium(): ONE_WIRE_BUS(14), RELAY_PIN(12), WLAN_SSID("ssid"), WLAN_PASS("password"), HOST("szymonmaczka.2ap.pl"), timeNtp(udpNtp, "0.pl.pool.ntp.org", 3600)
 {
 	EEPROM.begin(512);
 	initEeprom();
