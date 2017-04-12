@@ -1,0 +1,484 @@
+body {
+	background-attachment: fixed;
+	background-image: url("images/background.jpg");
+	border: none;
+	text-align: center;
+	font: normal 13px Verdana, sans-serif;
+	padding-left: 7%;
+	padding-right: 7%;
+	padding-bottom:7%;
+	margin-top: 0px;
+	position: relative;
+}
+
+#menu{
+	width: 100%;
+	position: relative;
+	margin-bottom: 3%;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+
+ul.menu_navigation {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	width: 100%;
+}
+
+ul.menu_navigation li {
+	float: left;
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+}
+
+ul.menu_navigation li a {
+	display: inline-block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 14px;
+	text-decoration: none;
+	transition: 0.3s;
+	font-size: 17px;
+	font-weight: bold;
+	font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+ul.menu_navigation li a:hover {background-color: #555;}
+ul.menu_navigation li.icon {display: none;}
+
+#control{
+	#border: 3px solid red;
+	padding-top: 2%;
+	padding-bottom: 1%;
+	margin-bottom: 3%;
+	width: 100%;
+	height: auto;
+	background: #333;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	float:left;
+}
+
+#control_button{
+	-moz-box-shadow: 0px 10px 14px -7px #3e7327;
+	-webkit-box-shadow: 0px 10px 14px -7px #3e7327;
+	box-shadow: 0px 10px 14px -7px #3e7327;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #4d6b3e), color-stop(1, #42b00a));
+	background:-moz-linear-gradient(top, #4d6b3e 5%, #42b00a 100%);
+	background:-webkit-linear-gradient(top, #4d6b3e 5%, #42b00a 100%);
+	background:-o-linear-gradient(top, #4d6b3e 5%, #42b00a 100%);
+	background:-ms-linear-gradient(top, #4d6b3e 5%, #42b00a 100%);
+	background:linear-gradient(to bottom, #4d6b3e 5%, #42b00a 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#4d6b3e', endColorstr='#42b00a',GradientType=0);
+	background-color:#4d6b3e;
+	-moz-border-radius:15px;
+	-webkit-border-radius:15px;
+	border-radius:15px;
+	border:3px solid #4b8f29;
+	display:inline-block;
+	cursor:pointer;
+	color:#fffaff;
+	font-family:Arial;
+	font-size:13px;
+	font-weight:bold;
+	padding:20px 60px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #5b8a3c;
+}
+
+#scheduler_button{
+	-moz-box-shadow: 0px 10px 14px -7px #3e7327;
+	-webkit-box-shadow: 0px 10px 14px -7px #3e7327;
+	box-shadow: 0px 10px 14px -7px #3e7327;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #4d6b3e), color-stop(1, #42b00a));
+	background:-moz-linear-gradient(top, #4d6b3e 5%, #42b00a 100%);
+	background:-webkit-linear-gradient(top, #4d6b3e 5%, #42b00a 100%);
+	background:-o-linear-gradient(top, #4d6b3e 5%, #42b00a 100%);
+	background:-ms-linear-gradient(top, #4d6b3e 5%, #42b00a 100%);
+	background:linear-gradient(to bottom, #4d6b3e 5%, #42b00a 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#4d6b3e', endColorstr='#42b00a',GradientType=0);
+	background-color:#4d6b3e;
+	-moz-border-radius:15px;
+	-webkit-border-radius:15px;
+	border-radius:15px;
+	border:3px solid #4b8f29;
+	display:inline-block;
+	cursor:pointer;
+	color:#fffaff;
+	font-family:Arial;
+	font-size:13px;
+	font-weight:bold;
+	padding:20px 60px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #5b8a3c;
+}
+
+#control_chart_box{
+	padding-bottom: 2%;
+	margin-bottom: 3%;
+	width: 100%;
+	background: #333;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	float:left;
+}
+
+#control_chart{
+	margin: 2% 2% 2% 2%;
+	height:400px;
+	width: 96%;
+	background: #333;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+
+#temperature_chart_box{
+	margin-bottom: 3%;
+	width: 100%;
+	background: #333;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	float:left;
+}
+
+#temperature_chart{
+	margin: 2% 2% 2% 2%;
+	height:400px;
+	width: 96%;
+	background: #333;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+
+#scheduler{
+	margin-bottom: 3%;
+	width: 100%;
+	background: #333;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	float:left;
+}
+
+#temperautre_control_table{
+	margin-left: 25%;
+	margin-bottom: 2%;
+	width: 50%;
+	background: #333;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	float:left;
+}
+
+.tg_temperature_checkbox_space{
+	width: 50px;
+}
+
+.control_summary_table{
+	border-collapse:collapse;
+	border-spacing:0;
+	margin:0px auto;
+}
+
+.control_summary_table td{
+	font: 18px Helvetica, Arial, sans-serif;
+	padding: 10px 5px;
+	overflow: hidden;
+	word-break: normal;
+	color: #f2f2f2;
+}
+
+.control_summary_table th{
+	font: 18px Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	padding: 10px 5px;
+	overflow: hidden;
+	word-break:normal;
+	color: #f2f2f2;
+}
+
+.control_summary_table .control_summary_table_head{
+	text-align:center;
+	vertical-align:top;
+}
+
+.control_summary_table .control_summary_table_content{
+	vertical-align:top;
+}
+
+.control_summary_table .control_summary_table_empty{
+	padding-left:130px;
+}
+
+.control_summary_table .control_summary_table_title{
+	text-align:left;
+	padding-right: 30px;
+}
+
+.labels{
+	font: 18px Helvetica, Arial, sans-serif;
+	padding: 10px 5px;
+	overflow: hidden;
+	word-break: normal;
+	color: #f2f2f2;
+}
+
+select {
+	padding:3px;
+	margin: 0;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;
+	-webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+	-moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+	box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+	background: #f8f8f8;
+	color:#888;
+	border:none;
+	outline:none;
+	display: inline-block;
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	appearance:none;
+	cursor:pointer;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	select {padding-right:18px}
+}
+
+.input{
+	color:#aaa;
+}
+
+.dropdown {
+	position:relative;
+}
+
+.dropdown:after {
+	content:'<>';
+	font:11px "Consolas", monospace;
+	color:#aaa;
+	-webkit-transform:rotate(90deg);
+	-moz-transform:rotate(90deg);
+	-ms-transform:rotate(90deg);
+	transform:rotate(90deg);
+	right:8px; top:2px;
+	padding:0 0 2px;
+	border-bottom:1px solid #ddd;
+	position:absolute;
+	pointer-events:none;
+}
+
+.dropdown:before {
+	right:6px; top:0px;
+	width:20px; height:20px;
+	background:#f8f8f8;
+	position:absolute;
+	pointer-events:none;
+	display:block;
+}
+
+#scheduler_table{
+	border-collapse:collapse;
+	border-spacing:0;
+	margin:0px auto;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+#control_select_period, #temperature_select_period{
+	width: 120px;
+}
+
+#device_action_type{
+	width: 160px;
+}
+
+#device_action{
+	width: 80px;
+}
+
+.days_slider {
+	width: 80px;
+	height: 26px;
+	background: #333;
+	margin: 10px auto;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	position: relative;
+
+	-webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+	-moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+}
+
+.days_slider:after {
+	content: 'ON';
+	font: 12px/26px Arial, sans-serif;
+	color: #00bf00;
+	position: absolute;
+	left: 10px;
+	z-index: 0;
+	font-weight: bold;
+	text-shadow: 1px 1px 0px rgba(255,255,255,.15);
+}
+
+.days_slider:before {
+	content: 'OFF';
+	font: 12px/26px Arial, sans-serif;
+	color: #bf0000;
+	position: absolute;
+	right: 10px;
+	z-index: 0;
+	font-weight: bold;
+}
+
+.days_slider label {
+	display: block;
+	width: 34px;
+	height: 20px;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+
+	-webkit-transition: all .4s ease;
+	-moz-transition: all .4s ease;
+	-o-transition: all .4s ease;
+	-ms-transition: all .4s ease;
+	transition: all .4s ease;
+	cursor: pointer;
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	z-index: 1;
+
+	-webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+	background: #fcfff4;
+
+	background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
+}
+
+.days_slider input[type=checkbox]:checked + label {
+	left: 43px;
+}
+
+.days_slider input[type=checkbox] {
+	visibility: hidden;
+}
+
+.days{
+	color: #f2f2f2;
+	font-size: 16px;
+}
+
+
+.temperature_serie_show {
+	width: 80px;
+	height: 26px;
+	background: #333;
+	margin: 10px auto;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	position: relative;
+
+	-webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+	-moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+}
+
+.temperature_serie_show:before {
+	content: 'ON';
+	font: 12px/26px Arial, sans-serif;
+	color: #00bf00;
+	position: absolute;
+	left: 10px;
+	z-index: 0;
+	font-weight: bold;
+	text-shadow: 1px 1px 0px rgba(255,255,255,.15);
+}
+
+.temperature_serie_show:after {
+	content: 'OFF';
+	font: 12px/26px Arial, sans-serif;
+	color: #bf0000;
+	position: absolute;
+	right: 10px;
+	z-index: 0;
+	font-weight: bold;
+}
+
+.temperature_serie_show label {
+	display: block;
+	width: 34px;
+	height: 20px;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+
+	-webkit-transition: all .4s ease;
+	-moz-transition: all .4s ease;
+	-o-transition: all .4s ease;
+	-ms-transition: all .4s ease;
+	transition: all .4s ease;
+	cursor: pointer;
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	z-index: 1;
+
+	-webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+	background: #fcfff4;
+
+	background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
+}
+
+.temperature_serie_show input[type=checkbox]:checked + label {
+	left: 43px;
+}
+
+.temperature_serie_show input[type=checkbox] {
+	visibility: hidden;
+}
+
+.days_check{
+	padding-left: 30px;
+}
