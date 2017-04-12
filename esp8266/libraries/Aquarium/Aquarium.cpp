@@ -2,9 +2,8 @@
 
 WiFiUDP udpNtp;
 
-Aquarium::Aquarium(): ONE_WIRE_BUS(14), RELAY_PIN(12), WLAN_SSID("ssid"), WLAN_PASS("password"), HOST("szymonmaczka.2ap.pl"), timeNtp(udpNtp, "0.pl.pool.ntp.org", 3600)
+Aquarium::Aquarium(): ONE_WIRE_BUS(14), RELAY_PIN(12), WLAN_SSID("ssid"), WLAN_PASS("password"), HOST("examplehost.pl"), timeNtp(udpNtp, "0.pl.pool.ntp.org", 3600)
 {
-	EEPROM.begin(512);
 	initEeprom();
 	
 	setDeviceState(restoreDeviceState());
@@ -36,6 +35,8 @@ int Aquarium::saveTemperatureAccuracy(float temperatureAccuracyPram){
 }
 
 void Aquarium::initEeprom(){
+	EEPROM.begin(512);
+	
 	if (EEPROM.read(0) != '1'){
 		EEPROM.write(0, '1');
 		
@@ -192,7 +193,7 @@ int Aquarium::decodeCrc(long int crcPram){
 	crc_high = (137 * pow(timeNtp.getHours(), 2)) + (timeNtp.getMinutes() * pow((timeNtp.getSeconds() + 1), 3)) + 1051;
 	
 	if ((crcPram <= crc_high) && (crcPram >= crc_low))
-		return 0;
+		return 1;
 	else
 		return -1;
 }
@@ -213,7 +214,7 @@ int Aquarium::decodeCrcSimple(long int crcPram){
 	crc = timeNtp.getMinutes() % timeNtp.getHours();
 	
 	if (crcPram == crc)
-		return 0;
+		return 1;
 	else
 		return -1;
 }
