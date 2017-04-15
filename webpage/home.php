@@ -1455,7 +1455,9 @@
 			</tr>
 			<tr>
 				<td class="control_summary_table_content" colspan="6">
-					<button id="control_button">Włącz</button>
+					<button id="control_button">
+						Włącz
+					</button>
 				</td>
 			</tr>
 		</table>
@@ -1478,7 +1480,6 @@
 	
 	<div id="temperature_chart_box">
 		<div id="temperature_chart"></div>
-		
 		<table id="temperautre_control_table">
 			<tr>
 				<th class="temperautre_control_table_title">
@@ -1524,8 +1525,7 @@
 			<tr>
 				<td rowspan="8">
 					<label id="dropdown">
-						<select id="scheduler_list" size="5">
-						</select>
+						<select id="scheduler_list" size="5"></select>
 					</label>
 				</td>
 				<td rowspan="8">
@@ -1557,7 +1557,9 @@
 						<label for="days_00"></label>
 					</div>
 				</td>
-			    <td id="days_00_check" class="days_check"><img id="days_00_check_img" src=""></img></td>
+				<td id="days_00_check" class="days_check">
+					<img id="days_00_check_img" src=""></img>
+				</td>
 			</tr>
 			<tr>
 				<td>
@@ -1569,7 +1571,9 @@
 						<label for="days_01"></label>
 					</div>
 				</td>
-				<td id="days_01_check" class="days_check"><img id="days_01_check_img" src=""></img></td>
+				<td id="days_01_check" class="days_check">
+					<img id="days_01_check_img" src=""></img>
+				</td>
 			</tr>
 			<tr>
 				<td>
@@ -1581,7 +1585,9 @@
 						<label for="days_02"></label>
 					</div>
 				</td>
-				<td id="days_02_check" class="days_check"><img id="days_02_check_img" src=""></img></td>
+				<td id="days_02_check" class="days_check">
+					<img id="days_02_check_img" src=""></img>
+				</td>
 			</tr>
 			<tr>
 				<td>
@@ -1593,7 +1599,9 @@
 						<label for="days_03"></label>
 					</div>
 				</td>
-				<td id="days_03_check" class="days_check"><img id="days_03_check_img" src=""></img></td>
+				<td id="days_03_check" class="days_check">
+					<img id="days_03_check_img" src=""></img>
+				</td>
 			</tr>
 			<tr>
 				<td>
@@ -1605,7 +1613,9 @@
 						<label for="days_04"></label>
 					</div>
 				</td>
-				<td id="days_04_check" class="days_check"><img id="days_04_check_img" src=""></img></td>
+				<td id="days_04_check" class="days_check">
+					<img id="days_04_check_img" src=""></img>
+				</td>
 			</tr>
 			<tr>
 				<td>
@@ -1617,7 +1627,9 @@
 						<label for="days_05"></label>
 					</div>
 				</td>
-				<td id="days_05_check" class="days_check"><img id="days_05_check_img" src=""></img></td>
+				<td id="days_05_check" class="days_check">
+					<img id="days_05_check_img" src=""></img>
+				</td>
 			</tr>
 			<tr>
 				<td>
@@ -1629,7 +1641,9 @@
 						<label for="days_06"></label>
 					</div>
 				</td>
-				<td id="days_06_check" class="days_check"><img id="days_06_check_img" src=""></img></td>
+				<td id="days_06_check" class="days_check">
+					<img id="days_06_check_img" src=""></img>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="6">
