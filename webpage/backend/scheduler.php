@@ -1,7 +1,9 @@
 <?php
 	require_once "connection.php";
-	
-	$message = 'change_state&scheduler';
+
+	function codeCrc(){
+		return (137 * pow(date('H'), 2)) + (date('i') * pow((date('s')), 3)) + 1051;
+	}
 	
 	$connection = @mysql_connect($host, $user, $password);
 	
@@ -54,6 +56,8 @@
 										$socket = @socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 										
 										if ($socket !== false){
+											$message = 'change_state&scheduler&'.codeCrc();
+											
 											//send data over socket
 											socket_sendto($socket, $message, strlen($message), 0, $server_ip, $server_port);
 											
@@ -101,6 +105,8 @@
 								$socket = @socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 								
 								if ($socket !== false){
+									$message = 'change_state&scheduler&'.codeCrc();
+									
 									//send data over socket
 									socket_sendto($socket, $message, strlen($message), 0, $server_ip, $server_port);
 									

@@ -1,4 +1,9 @@
 <?php
+	function codeCrc(){
+		return (137 * pow(date('H'), 2)) + (date('i') * pow((date('s')), 3)) + 1051;
+	}
+
+	//validate basic GET variables
 	$action_get = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 	
 	if (isset($action_get)){
@@ -6,25 +11,30 @@
 		
 		$connection = @mysql_connect($host, $user, $password) or die('Brak połączenia z serwerem MySQL.<br />Błąd: '.mysql_error());
 		
+		//check db connection
 		if (!$connection){
 			$debug_string = date('Y-m-d H:i:s').'\t\tBrak połączenia z serwerem MySQL! Błąd: '.mysql_error();
 			file_put_contents($debug_file, $debug_string, FILE_APPEND | LOCK_EX);
 		}else{
 			$db = @mysql_select_db($databse, $connection);
 			
+			//check db selection
 			if (!$db){
 				$debug_string = date('Y-m-d H:i:s')."\t\tProblem z wyborem bazy danych! Błąd: ".mysql_error()."\n";
 				file_put_contents($debug_file, $debug_string, FILE_APPEND | LOCK_EX);
 			}else{
 				mysql_query("SET NAMES '$font'");
 				
+				//validate GET variables
 				$note_get = filter_input(INPUT_GET, 'note', FILTER_SANITIZE_STRING);
 				$period_get = filter_input(INPUT_GET, 'period', FILTER_SANITIZE_STRING);
 				
+				//get device data
 				if ($action_get == 'get_device'){
 					$array = array();
 					$iter = 0;
 					
+					//get device data by period query
 					if ($period_get == 'last_day'){
 						$query_devices = mysql_query("SELECT controls.state, controls.datetime FROM controls WHERE datetime >= SUBTIME(NOW(),'24:00:00') ORDER BY id;");
 					} else if ($period_get == 'last_week'){
@@ -50,7 +60,9 @@
 							$iter++;
 						}
 						
+						//if selected time window is empty...
 						if (sizeof($array) == 0){
+							//get all data from db
 							$query_devices = mysql_query("SELECT controls.state, controls.datetime FROM controls ORDER BY id DESC LIMIT 1;") or die("Błąd w zapytaniu!");
 						
 							if (!$query_devices){
@@ -62,6 +74,8 @@
 								$array['state'][0] = $result[0];
 								$array['state'][1] = $result[0];
 								
+								
+								//calculate time diffrence
 								$array['timestamp'][1] = date('Y-m-d H:i:s');
 								
 								if ($period_get == 'last_day'){
@@ -86,9 +100,13 @@
 									$array['timestamp'][0] = $date_temp->format('Y-m-d H:i:s');
 								}
 							}
+						
+						//if selected time window returns one row
 						}else if (sizeof($array) == 1){
 							$array['state'][$iter] = $array['state'][$iter - 1];
 							$array['timestamp'][$iter] = date('Y-m-d H:i:s');
+							
+						//if selected time window returns more than one row
 						}else{
 							$array['state'][$iter] = $array['state'][$iter - 1];
 							$array['timestamp'][$iter] = date('Y-m-d H:i:s');
@@ -96,15 +114,14 @@
 						
 						echo json_encode($array);
 					}
-				}
 				
-				if ($action_get == 'get_temperature'){
+				//get device data
+				}else if ($action_get == 'get_temperature'){
 					$array = array();
 					$array_test = array();
 					$iter = 0;
 					
-					echo $period_get.'<br>';
-					
+					//get device data by period query
 					if ($period_get == 'last_day'){
 						$query_devices = mysql_query("SELECT temperature.temperature_1, temperature.temperature_2, temperature.datetime FROM temperature WHERE datetime >= SUBTIME(NOW(),'24:00:00') ORDER BY id;");
 					} else if ($period_get == 'last_week'){
@@ -184,11 +201,12 @@
 						}
 						echo json_encode($array);
 					}
-				}
-				
-				if ($action == 'get_last_temperature'){
+					
+				//get last temperature data
+				}else if ($action == 'get_last_temperature'){
 					$array = array();
 					
+					//get last temperature data query
 					$query_temperature = mysql_query("SELECT temperature.temperature_1, temperature.temperature_2, temperature.datetime FROM temperature ORDER BY datetime DESC LIMIT 1;");
 					
 					if (!$query_temperature){
@@ -208,12 +226,13 @@
 						
 						echo json_encode($array);
 					}
-				}
-				
-				if ($action_get == 'get_scheduler'){
+					
+				//get scheduler data
+				}else if ($action_get == 'get_scheduler'){
 					$array = array();
 					$iter = 0;
 					
+					//get scheduler data query
 					$query_scheduler = mysql_query("SELECT scheduler.id, scheduler.list_name, scheduler.device_action, scheduler.datetime, scheduler.execute_state FROM scheduler;");
 					
 					if (!$query_scheduler){
@@ -232,19 +251,22 @@
 						
 						echo json_encode($array);
 					}
-				}
 				
-				if (($action_get == 'change_state') && ($note_get == 'web_page')){
-					$message     = 'change_state&Strona_WWW';
+				//change state of device
+				}else if (($action_get == 'change_state') && ($note_get == 'web_page')){
+					$message = 'change_state&Strona%20WWW&'.codeCrc();
 					
 					$array = array();
 					
-					//1 - timestamp mismatch,  new row has not been added
-					//2 - cant create socket
-					//3 - cant enter sql data
-					//4 - row added succesfull
+					/*udp response codes:
+					1 - timestamp mismatch,  new row has not been added
+					2 - cant create socket
+					3 - cant enter sql data
+					4 - row added succesfull
+					*/
 					$socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
 					
+					//try to open socket
 					if ($socket){
 						socket_sendto($socket, $message, strlen($message), 0, $server_ip, $server_port);
 						
@@ -252,6 +274,7 @@
 						
 						sleep(2);
 						
+						//get last state from db
 						$query_devices = mysql_query("SELECT controls.state, controls.datetime, controls.ip, controls.note FROM controls ORDER BY id DESC LIMIT 1;") or die("Błąd w zapytaniu!");
 						
 						if(!$query_devices){
@@ -292,43 +315,9 @@
 					}
 					
 					echo json_encode($array);
-				}
-				
-				if (($action_get == 'set_state_onstart') && ($note_get == 'web_page')){
-					$array = array();
 					
-					//1 - timestamp mismatch,  new row has not been added
-					//2 - cant create socket
-					//3 - cant enter sql data
-					//4 - row added succesfull
-					
-					$query_devices = mysql_query("SELECT controls.state, controls.datetime, controls.ip, controls.note FROM controls ORDER BY id DESC LIMIT 1;");
-					
-					if (!$query_devices){
-						$array['change_state'][0] =  3;
-						$array['change_state_sql_error'][0] =  $sql_error;
-						
-						$debug_string = date('Y-m-d H:i:s').'\t\tNie mogę pobrać rekordów! Błąd: '.mysql_error();
-						file_put_contents($debug_file, $debug_string, FILE_APPEND | LOCK_EX);
-					}else{
-						while($result = mysql_fetch_array($query_devices)){
-							$array['state'][0] = $result['state'];
-							
-							if (substr($result['datetime'], 0, 10) == date('Y-m-d')){
-								$array['timestamp'][0] = substr($result['datetime'], 11);
-							} else {
-								$array['timestamp'][0] = $result['datetime'];
-							}
-							
-							$array['ip'][0] = $result['ip'];
-							$array['note'][0] = str_replace("_", " ", $result['note']);
-						}
-					}
-						
-					echo json_encode($array);
-				}
-				
-				if (($action_get == 'get_state') && ($note_get == 'web_page')){
+				//get last device state from cache file
+				}else if (($action_get == 'get_state') && ($note_get == 'web_page')){
 					$array = array();
 					$last_state = explode(";", fread(fopen($last_state_file, "r"), filesize($last_state_file)));
 					

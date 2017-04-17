@@ -1,19 +1,15 @@
 <?php
-function decodeCrc($crcPram){
-	date('Y-m-d H:i:s')
-	
-	$crc_low = (137 * pow(date('H'), 2)) + (date('i') * pow((date('s') - 1), 3)) + 1051;
-	$crc_high = (137 * pow(date('H'), 2)) + (date('i') * pow((date('s') + 1), 3)) + 1051;
-	
-	if (($crcPram <= $crc_high) && ($crcPram >= $crc_low))
-		return 1;
-	else
-		return -1;
-}
-
-function codeCrc(){
-	return (137 * pow(date('H'), 2)) + (date('i') * pow((date('s')), 3)) + 1051;
-}
+	function decodeCrc($crcPram){
+		date('Y-m-d H:i:s')
+		
+		$crc_low = (137 * pow(date('H'), 2)) + (date('i') * pow((date('s') - 1), 3)) + 1051;
+		$crc_high = (137 * pow(date('H'), 2)) + (date('i') * pow((date('s') + 1), 3)) + 1051;
+		
+		if (($crcPram <= $crc_high) && ($crcPram >= $crc_low))
+			return 1;
+		else
+			return -1;
+	}
 
 	//validate basic GET variables
 	$action_get = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
